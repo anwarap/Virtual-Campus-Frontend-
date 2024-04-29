@@ -1,42 +1,65 @@
-import userRoutes from "../services/endpoints/userEndpoints";
+import teacherRoutes from "../services/endpoints/TeacherEndpoints";
 import Api from "../services/api";
-import { handleError } from "../middleware/ErrorHandler";
 import { toast } from "react-toastify";
+import { handleError } from "../middleware/ErrorHandler";
 
 
-export const signup = async(user)=>{
-    try{
-        const response = await Api.post(userRoutes.signup, user);
-        return response;
-    }catch(error){
-        console.log('hererere')
-        if(error && error.isAxiosError){
-            handleError(error)
-        }else{
-            toast.error("Something went wrong")
-        }
-    }
-}
-
-export const verify = async(user)=>{
+export const signup = async(teacher)=>{
     try {
-        const response = await Api.post(userRoutes.verifyOTP, user);
+        const response = await Api.post(teacherRoutes.signup,teacher);
         return response;
     } catch (error) {
         if(error && error.isAxiosError){
             handleError(error)
         }else{
-            console.log('here')
-
             toast.error("Something went wrong")
         }
     }
-}
+};
+
+export const verify = async(teacher)=>{
+    try {
+        const response = await Api.post(teacherRoutes.verify,teacher);
+        return response;
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        }
+    }
+};
 
 export const resendotp = async()=>{
     try {
-        const response = await Api.get(userRoutes.resendotp);
+        const response = await Api.get(teacherRoutes.resendotp);
         return response;
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        } 
+    }
+}
+
+export const teacherLogin = async (data)=>{
+    try {
+        const response = await Api.post(teacherRoutes.login,data);
+        return response;    
+    } catch (error) {
+       if(error && error.isAxiosError){
+        handleError(error)
+       }else{
+        toast.error("Something went wrong")
+       }
+    }
+}
+
+export const teacherLogout = async()=>{
+    try {
+        const response = await Api.post(teacherRoutes.logout);
+        return response;     
     } catch (error) {
         if(error && error.isAxiosError){
             handleError(error)
@@ -46,28 +69,15 @@ export const resendotp = async()=>{
     }
 }
 
-export const login = async(loginData)=>{
+export const addCourse = async ()=>{
     try {
-        const response = await Api.post(userRoutes.login,loginData);
+        const response = await Api.post(teacherRoutes.addCourse)
         return response;
     } catch (error) {
         if(error && error.isAxiosError){
             handleError(error)
         }else{
             toast.error("Something went wrong")
-        }
-    }
-}
-
-export const logout = async()=>{
-    try {
-        const response = await Api.post(userRoutes.logout);
-        return response;
-    } catch (error) {
-        if(error && error.isAxiosError){
-            handleError(error)
-        }else{
-            toast.error("Something went wrong")
-        }
+        } 
     }
 }

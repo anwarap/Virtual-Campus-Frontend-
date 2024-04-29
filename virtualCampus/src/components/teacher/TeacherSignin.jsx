@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/userapi";
-import { loginUser } from "../../slice/authSlice";
+import { teacherLogin } from "../../api/teacherapi";
+import { loginTeacher } from "../../slice/authSlice";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { GoogleLogin} from "@react-oauth/google";
 import {jwtDecode} from "jwt-decode";
 
-
-const Signin = () => {
+const TeacherSignin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isUser } = useSelector((state) => state.auth);
+  const { isTeacher } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isUser) {
-      navigate("/user");
+    if (isTeacher) {
+      navigate("/teacher");
     }
   }, []);
 
@@ -49,13 +48,12 @@ const Signin = () => {
       email,
       password,
     };
-
-    let response = await login(formData);
+    let response = await teacherLogin(formData);
 
     if (response?.status == 200) {
       toast.success("Login successfull");
-      dispatch(loginUser(response.data));
-      navigate("/user");
+      dispatch(loginTeacher(response.data));
+      navigate("/teacher");
     } 
   };
 
@@ -68,11 +66,11 @@ const Signin = () => {
       name:decode.name,
       password:"111"
     };
-    const result = await login(data);
+    const result = await teacherLogin(data);
     if(result?.status==200){
       toast.success("Login successful");
-      dispatch(loginUser(data));
-      navigate("/user")
+      dispatch(loginTeacher(data));
+      navigate("/teacher")
     }else{
       toast.error("Email already exists");
     }
@@ -130,8 +128,7 @@ const Signin = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-start">
-                     
-                   
+                      
                     </div>
                     <a
                       href="#"
@@ -149,7 +146,7 @@ const Signin = () => {
                   </button>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     Don’t have an account yet?{" "}
-                    <Link to="/user/signup">
+                    <Link to="/teacher/signup">
                       <a
                         href="#"
                         className="font-medium text-primary-600 hover:underline dark:text-primary-500"
@@ -181,4 +178,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default TeacherSignin;

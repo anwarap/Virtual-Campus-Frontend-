@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/userapi";
-import { loginUser } from "../../slice/authSlice";
+import { adminLogin } from "../../api/adminapi";
+import { loginAdmin} from "../../slice/authSlice";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { GoogleLogin} from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
 
-
-const Signin = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isUser } = useSelector((state) => state.auth);
+  const { isAdmin } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isUser) {
-      navigate("/user");
+    if (isAdmin) {
+      navigate("/admin/dashboard");
     }
   }, []);
 
@@ -50,33 +47,16 @@ const Signin = () => {
       password,
     };
 
-    let response = await login(formData);
+    let response = await adminLogin(formData);
 
     if (response?.status == 200) {
       toast.success("Login successfull");
-      dispatch(loginUser(response.data));
-      navigate("/user");
-    } 
-  };
-
-  const getGoogleUser = async (response)=>{
-    console.log('here')
-    const decode = jwtDecode(response.credential)
-    const data = {
-      is_google:true,
-      email:decode.email,
-      name:decode.name,
-      password:"111"
-    };
-    const result = await login(data);
-    if(result?.status==200){
-      toast.success("Login successful");
-      dispatch(loginUser(data));
-      navigate("/user")
-    }else{
-      toast.error("Email already exists");
+      dispatch(loginAdmin(response.data));
+      navigate("/admin/dashboard");
+    } else {
+      toast.error("Invalid credentials");
     }
-  }
+  };
 
   return (
     <div>
@@ -130,8 +110,23 @@ const Signin = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-start">
-                     
-                   
+                      <div className="flex items-center h-5">
+                        <input
+                          id="remember"
+                          aria-describedby="remember"
+                          type="checkbox"
+                          className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                       
+                        />
+                      </div>
+                      <div className="ml-3 text-sm">
+                        <label
+                          htmlFor="remember"
+                          className="text-gray-500 dark:text-gray-300"
+                        >
+                          Remember me
+                        </label>
+                      </div>
                     </div>
                     <a
                       href="#"
@@ -159,19 +154,6 @@ const Signin = () => {
                     </Link>
                   </p>
                 </form>
-                <>
-               <p className="mb-6 text-base text-[#adadad]">
-                 Register With
-               </p>
-              <div className="mx-auto mb-12 flex justify-center items-center">
-              <GoogleLogin
-                onSuccess={(response) => {
-                  getGoogleUser(response);
-                }}
-                onError={() => console.log("Error")}
-              />
-            </div>
-            </>
               </div>
             </div>
           </div>
@@ -181,4 +163,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default AdminLogin;

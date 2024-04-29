@@ -2,7 +2,8 @@ const userRoutes = {
     login:"/user/signin",
     signup:"/user/signup",
     verifyOTP:"/user/verify",
-    logout:"/user/logout"
+    logout:"/user/logout",
+    resendotp:"/user/resend-otp",
 }
 
 

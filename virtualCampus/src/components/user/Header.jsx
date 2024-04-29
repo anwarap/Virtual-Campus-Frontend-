@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom';
-import {logout} from '../api/userapi';
-import {logoutUser} from '../slice/authSlice';
+import {logout} from '../../api/userapi';
+import {logoutUser} from '../../slice/authSlice';
 import {useSelector,useDispatch} from 'react-redux'
 import { toast } from 'react-toastify';
 import './Header.css'
@@ -105,28 +105,23 @@ const Header = () => {
     >
      <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700" style={{backgroundColor:"#3447AE"}}>
   <li>
-    <a className='Nav_hover'
-       href="#"
-       style={{color:'white'}}
-    >
-      Home
-    </a>
+
+    <Link to={"/user"}
+      className='Nav_hover' style={{color:'white'}}>
+        Home
+      </Link>
   </li>
   <li>
-    <a className='Nav_hover'
-       href="#"
-       style={{color:'white'}}
-    >
-      Course
-    </a>
+  <Link to={"/user/course"}
+      className='Nav_hover' style={{color:'white'}}>
+        Course
+      </Link>
   </li>
   <li>
-    <a className='Nav_hover'
-       href="#"
-       style={{color:'white'}}
-    >
-      About
-    </a>
+  <Link to={"/user/about"}
+      className='Nav_hover' style={{color:'white'}}>
+        About
+      </Link>
   </li>
   {/* <li>
     <a className='Nav_hover'

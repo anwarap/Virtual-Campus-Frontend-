@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { signup, verify,resendotp } from "../../api/userapi";
-import { loginUser } from "../../slice/authSlice";
 import OTPInput from "../../components/common/OTPInput";
+import { signup, verify,resendotp } from "../../api/teacherapi";
+import { loginTeacher } from "../../slice/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { GoogleLogin} from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
-const Signup = () => {
+const TeacherSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -18,16 +18,17 @@ const Signup = () => {
   const [completed, setCompleted] = useState(false);
   const [otp, setOtp] = useState("");
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isUser } = useSelector((state) => state.auth);
+
+  const { isTeacher } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (isUser) {
-      navigate("/user");
+    if (isTeacher) {
+      navigate("/teacher");
     }
   }, []);
+
   const isValidEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
@@ -45,7 +46,6 @@ const Signup = () => {
     const trimmedMobile = mobile.replace(/\s+/g, "");
     const trimmedPassword = password.replace(/\s+/g, "");
     const trimmedCpassword = Cpassword.replace(/\s+/g, "");
-    console.log(trimmedName.length, "lengt");
     if (trimmedName.length === 0) {
       toast.error("Name is required");
       return;
@@ -105,40 +105,36 @@ const Signup = () => {
       mobile: mobile,
       otp: otp,
     };
-
-
-
-  
     const result = await verify(data);
-
+    console.log(result, "result");
     if (result?.status == 200) {
       toast.success("signup successful");
-      dispatch(loginUser(result.data.userSave.data._id));
-      navigate("/user");
+      dispatch(loginTeacher(result.data.teacherSave.data._id));
+      navigate("/teacher");
     } else {
-      navigate("/user/signup");
-
+      navigate("/teacher/signup");
     }
   };
-  
-  const getGoogleUser = async (response)=>{
-    console.log('here')
-    const decode = jwtDecode(response.credential)
+
+  const getGoogleUser = async (response) => {
+    console.log("here");
+    const decode = jwtDecode(response.credential);
     const data = {
-      is_google:true,
-      email:decode.email,
-      name:decode.name,
-      password:"111"
+      is_google: true,
+      email: decode.email,
+      name: decode.name,
+      password: "111",
     };
     const result = await signup(data);
-    if(result?.status==200){
+    if (result?.status == 200) {
       toast.success("Signup successful");
-      dispatch(loginUser(data));
-      navigate("/user")
-    }else{
+      dispatch(loginTeacher(data));
+      navigate("/teacher");
+    } else {
+      console.log("hehe");
       toast.error("Email already exists");
     }
-  }
+  };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -149,7 +145,9 @@ const Signup = () => {
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"></h1>
-            <h1 className="flex justify-center text-2xl font-bold">Join as Student</h1>
+            <h1 className="flex justify-center text-2xl font-bold">
+              Join as Teacher
+            </h1>
             {completed ? (
               <>
               <form onSubmit={handleFinalSubmit} encType="multipart/form-data">
@@ -157,19 +155,18 @@ const Signup = () => {
                 <div className="mb-10 mt-5">
                   <button
                     className="border-primary w-full cursor-pointer rounded-md border bg-3447AE py-3 px-5 text-base text-white transition hover:bg-opacity-90"
-                    type="submit" style={{ backgroundColor: "#3447AE" }}
+                    type="submit"
+                    style={{ backgroundColor: "#3447AE" }}
                   >
                     Submit
                   </button>
                 </div>{" "}
               </form>
               <div className="mb-10 mt-5">
-
                 <button onClick={()=> resendotp()}>
                     Resent OTP ?
                   </button>
                 </div>{" "}
-             
               </>
 
             ) : (
@@ -263,7 +260,7 @@ const Signup = () => {
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account?{" "}
-                  <Link to="/user/signin">
+                  <Link to="/teacher/signin">
                     <a className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                       Login here
                     </a>
@@ -271,21 +268,18 @@ const Signup = () => {
                 </p>
               </form>
             )}
-            {!completed &&(
-               <>
-               <p className="mb-6 text-base text-[#adadad]">
-                 Register With
-               </p>
-              <div className="mx-auto mb-12 flex justify-center items-center">
-              <GoogleLogin
-                onSuccess={(response) => {
-                  getGoogleUser(response);
-                }}
-                onError={() => console.log("Error")}
-              />
-            </div>
-            </>
-          
+            {!completed && (
+              <>
+                <p className="mb-6 text-base text-[#adadad]">Register With</p>
+                <div className="mx-auto mb-12 flex justify-center items-center">
+                  <GoogleLogin
+                    onSuccess={(response) => {
+                      getGoogleUser(response);
+                    }}
+                    onError={() => console.log("Error")}
+                  />
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -294,4 +288,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default TeacherSignup;

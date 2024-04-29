@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../components/Header";
+import Header from "../../components/user/Header";
 
 const Home = () => {
   return (
@@ -7,28 +7,29 @@ const Home = () => {
       <Header />
 
       <section>
-        <div className="flex flex-col px-9 pt-9 ">
-          <div className="flex flex-row justify-between">
-            <div className="flex flex-col justify-center p-5  w-2/3">
-              <h1 className="font-bold text-3xl">Welcome to Virtual Campus</h1>
-              <br />
-              <h1 className=" text-xl" style={{ width: "450px" }}>
-                Your go-to platform for online learning! Explore a diverse range
-                of educational courses designed to enhance your knowledge and
-                skills—all from the convenience of your home.
-              </h1>
-            </div>
+  <div className="flex flex-col px-9 pt-9">
+    <div className="flex flex-row justify-between ">
+      <div className="flex flex-col justify-center p-5 w-1/2">
+        <h1 className="font-bold text-3xl">Welcome to Virtual Campus</h1>
+        <br />
+        <h1 className="text-xl" style={{ width: "450px" }}>
+          Your go-to platform for online learning! Explore a diverse range
+          of educational courses designed to enhance your knowledge and
+          skills—all from the convenience of your home.
+        </h1>
+      </div>
 
-            <div className=" flex justify-center w-3/4 b">
-              <img
-                src="\public\homeimg.jpg"
-                alt=""
-                className="w-3/4 h-80 object-fill"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="flex justify-center w-1/2">
+        <img
+          src="\homeimg.jpg"
+          alt=""
+          className="w-full h-80 object-fill"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <section>
@@ -37,7 +38,7 @@ const Home = () => {
         <div className="flex flex-row justify-between">
         <div className=" flex justify-center w-2/3">
               <img
-                src="\public\home second iamge.jpg"
+                src="\home second iamge.jpg"
                 alt=""
                 className="w-3/4 h-80 object-fill"
               />
