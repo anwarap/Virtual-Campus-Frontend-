@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import Modal from "../common/Modal";
 import { openModal } from "../../slice/modelSlice";
 import {useDispatch } from "react-redux";
-import "./modal.css"
 
 const Users = () => {
   const [userData, setUserData] = useState([]);
@@ -19,11 +18,9 @@ const Users = () => {
   const blockUsers = async(id)=>{
     const response = await blockUser(id);
     if(response?.status == 200){
-      console.log('herere')
       setUserData((prevData)=>
         prevData.map((user)=>{
           if(user._id == id){
-            console.log('heee')
             return {...user,isBlocked:!user.isBlocked};
           }
           return user;
@@ -42,8 +39,8 @@ const Users = () => {
   }
   
   return (
+    
     <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
-      <Modal functionToCall={blockUsers} id={selectedUserId} className="modal" />
       <div className="overflow-x-auto">
       <table className="min-w-full">
         <thead>
@@ -76,6 +73,7 @@ const Users = () => {
         </thead>
           
           <tbody className="bg-white">
+            
             {filteredUser?.map((user) => (
               <tr key={user.id}>
                 <td className="px-4 py-2 sm:px-6 sm:py-4 border-b border-gray-800">
@@ -118,6 +116,8 @@ const Users = () => {
             ))}
           </tbody>
         </table>
+      <Modal functionToCall={blockUsers} id={selectedUserId} />
+
       </div>
     </div>
   );

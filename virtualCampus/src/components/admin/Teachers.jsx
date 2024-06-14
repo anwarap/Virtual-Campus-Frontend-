@@ -40,7 +40,6 @@ const Teachers = () => {
   const filteredTeacher =   teacherData ?teacherData : [];
   return (
     <div className="overflow-x-auto">
-      <Modal functionToCall={BlockTeacher} id={selectedTeacher} />
       <table className="min-w-full">
         <thead>
           <tr>
@@ -113,6 +112,8 @@ const Teachers = () => {
             ))}
         </tbody>
       </table>
+      <Modal functionToCall={BlockTeacher} id={selectedTeacher} />
+
     </div>
   );
 };

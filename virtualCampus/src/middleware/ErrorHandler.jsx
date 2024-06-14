@@ -4,6 +4,15 @@ import { toast } from "react-toastify";
 export const handleError =(error)=>{
     if(error){
         const errrorMessage = error.response?.data || "An error occured";
-        toast.error(errrorMessage.data.message)
+        console.log(errrorMessage)
+        if(errrorMessage.message){
+            console.log('fff')
+            toast.error(errrorMessage.message)
+        }else{
+            console.log(error)
+
+            toast.error(errrorMessage.data.message)
+        }
+
     }
 }

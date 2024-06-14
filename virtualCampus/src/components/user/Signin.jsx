@@ -12,6 +12,7 @@ import {jwtDecode} from "jwt-decode";
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
 
   const { isUser } = useSelector((state) => state.auth);
 
@@ -23,6 +24,8 @@ const Signin = () => {
       navigate("/user");
     }
   }, []);
+
+ 
 
   const isValidEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -60,7 +63,6 @@ const Signin = () => {
   };
 
   const getGoogleUser = async (response)=>{
-    console.log('here')
     const decode = jwtDecode(response.credential)
     const data = {
       is_google:true,
@@ -137,7 +139,11 @@ const Signin = () => {
                       href="#"
                       className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
+                    <Link to={"/user/forget-password"}>
+
                       Forgot password?
+                    </Link>
+
                     </a>
                   </div>
                   <button
@@ -160,6 +166,7 @@ const Signin = () => {
                   </p>
                 </form>
                 <>
+               
                <p className="mb-6 text-base text-[#adadad]">
                  Register With
                </p>

@@ -9,7 +9,6 @@ export const signup = async(user)=>{
         const response = await Api.post(userRoutes.signup, user);
         return response;
     }catch(error){
-        console.log('hererere')
         if(error && error.isAxiosError){
             handleError(error)
         }else{
@@ -26,8 +25,6 @@ export const verify = async(user)=>{
         if(error && error.isAxiosError){
             handleError(error)
         }else{
-            console.log('here')
-
             toast.error("Something went wrong")
         }
     }
@@ -46,10 +43,51 @@ export const resendotp = async()=>{
     }
 }
 
+
 export const login = async(loginData)=>{
     try {
         const response = await Api.post(userRoutes.login,loginData);
         return response;
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        }
+    }
+}
+
+export const forgetPassword1 = async (obj)=>{
+    try {
+        const response = await Api.post(userRoutes.forgetPassword1, obj)
+        return response
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        }
+    }
+}
+
+export const forgetPassword2 = async (otp)=>{
+    
+    try {     
+        const response = await Api.post(userRoutes.forgetPassword2, otp)
+        return response
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        }
+    }
+}
+
+export const forgetPasswordFinal = async (data)=>{
+    try {
+        const response = await Api.post(userRoutes.forgetPasswordFinal, data)
+        return response
     } catch (error) {
         if(error && error.isAxiosError){
             handleError(error)

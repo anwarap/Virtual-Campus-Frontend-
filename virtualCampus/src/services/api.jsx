@@ -13,7 +13,6 @@ Api.interceptors.response.use(
   (error) => {
     if (error.response) {
       const { data } = error.response;
-      console.log(data.message);
     } else {
       console.log(error);
     }

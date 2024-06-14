@@ -17,6 +17,8 @@ const TeacherSignup = () => {
   const [Cpassword, setCpassword] = useState("");
   const [completed, setCompleted] = useState(false);
   const [otp, setOtp] = useState("");
+  const [timer,setTimer] = useState(30);
+  const [showButton,setShowButton] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +30,20 @@ const TeacherSignup = () => {
       navigate("/teacher");
     }
   }, []);
+
+  const handleTimer = () => {
+    const interval = setInterval(() => {
+      setTimer(prev => {
+         
+        if (prev === 1) {
+          setShowButton(true);
+          clearInterval(interval);
+        }
+        return prev - 1; 
+      });
+    }, 1000);
+  };
+  
 
   const isValidEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -89,8 +105,8 @@ const TeacherSignup = () => {
 
     const result = await signup(formData);
     if (result?.status) {
-      console.log("true");
       setCompleted(true);
+      handleTimer()
     }
   };
 
@@ -106,7 +122,6 @@ const TeacherSignup = () => {
       otp: otp,
     };
     const result = await verify(data);
-    console.log(result, "result");
     if (result?.status == 200) {
       toast.success("signup successful");
       dispatch(loginTeacher(result.data.teacherSave.data._id));
@@ -117,7 +132,6 @@ const TeacherSignup = () => {
   };
 
   const getGoogleUser = async (response) => {
-    console.log("here");
     const decode = jwtDecode(response.credential);
     const data = {
       is_google: true,
@@ -131,7 +145,6 @@ const TeacherSignup = () => {
       dispatch(loginTeacher(data));
       navigate("/teacher");
     } else {
-      console.log("hehe");
       toast.error("Email already exists");
     }
   };
@@ -163,9 +176,15 @@ const TeacherSignup = () => {
                 </div>{" "}
               </form>
               <div className="mb-10 mt-5">
+              {showButton ? (
                 <button onClick={()=> resendotp()}>
                     Resent OTP ?
                   </button>
+
+              ):(
+                
+                <p>time remaining : {timer}</p>
+              )}
                 </div>{" "}
               </>
 

@@ -58,7 +58,6 @@ const TeacherSignin = () => {
   };
 
   const getGoogleUser = async (response)=>{
-    console.log('here')
     const decode = jwtDecode(response.credential)
     const data = {
       is_google:true,
@@ -134,7 +133,10 @@ const TeacherSignin = () => {
                       href="#"
                       className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
-                      Forgot password?
+                      <Link to={"/teacher/forget-password"}>
+
+                        Forgot password?
+                        </Link>
                     </a>
                   </div>
                   <button

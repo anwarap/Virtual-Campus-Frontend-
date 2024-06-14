@@ -6,6 +6,7 @@ import { closeModal } from "../../slice/modelSlice";
 const Modal = ({functionToCall, id}) => {
   const { modalOpen } = useSelector((state) => state.modal);
   const [showModal, setShowModal] = useState(modalOpen);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -83,9 +84,13 @@ const Modal = ({functionToCall, id}) => {
             </div>
           </div>
         </div>
+
+        
       ) : null}
     </>
   );
 };
 
 export default Modal;
+
+

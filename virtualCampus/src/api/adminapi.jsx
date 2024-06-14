@@ -57,3 +57,25 @@ export const blockTeacher = async (id)=>{
         }
     }
 }
+
+export const getCategory = async ()=>{
+    try {
+        const response = await Api.get(Adminroutes.getCategory);
+        return response;
+    } catch (error) {
+        if(error.response && error.response.data){
+            toast.error(error.response.data);
+        }
+    }
+}
+
+export const createCategory = async (data)=>{
+    try {
+        const response = await Api.post(Adminroutes.createCategory,data);
+        return response
+    } catch (error) {
+        if(error.response && error.response.data){
+            toast.error(error.response.data);
+        }
+    }
+}

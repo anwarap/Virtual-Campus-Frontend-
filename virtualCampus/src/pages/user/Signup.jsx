@@ -17,7 +17,8 @@ const Signup = () => {
   const [Cpassword, setCpassword] = useState("");
   const [completed, setCompleted] = useState(false);
   const [otp, setOtp] = useState("");
-
+  const [timer,setTimer] = useState(30);
+  const [showButton,setShowButton] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +29,21 @@ const Signup = () => {
       navigate("/user");
     }
   }, []);
+
+  const handleTimer = () => {
+    const interval = setInterval(() => {
+      setTimer(prev => {
+         
+        if (prev === 1) {
+          setShowButton(true);
+          clearInterval(interval);
+        }
+        return prev - 1; 
+      });
+    }, 1000);
+  };
+  
+
   const isValidEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
@@ -45,7 +61,6 @@ const Signup = () => {
     const trimmedMobile = mobile.replace(/\s+/g, "");
     const trimmedPassword = password.replace(/\s+/g, "");
     const trimmedCpassword = Cpassword.replace(/\s+/g, "");
-    console.log(trimmedName.length, "lengt");
     if (trimmedName.length === 0) {
       toast.error("Name is required");
       return;
@@ -89,8 +104,9 @@ const Signup = () => {
 
     const result = await signup(formData);
     if (result?.status) {
-      console.log("true");
       setCompleted(true);
+      handleTimer()
+
     }
   };
 
@@ -122,7 +138,6 @@ const Signup = () => {
   };
   
   const getGoogleUser = async (response)=>{
-    console.log('here')
     const decode = jwtDecode(response.credential)
     const data = {
       is_google:true,
@@ -164,10 +179,16 @@ const Signup = () => {
                 </div>{" "}
               </form>
               <div className="mb-10 mt-5">
-
+              {showButton ? (
                 <button onClick={()=> resendotp()}>
                     Resent OTP ?
                   </button>
+
+              ):(
+                
+                <p>time remaining : {timer}</p>
+              )}
+
                 </div>{" "}
              
               </>

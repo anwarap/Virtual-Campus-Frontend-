@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
-import { FaUserGraduate,FaBook,FaMoneyBillAlt,FaHourglassHalf} from "react-icons/fa";
+import { FaUserGraduate,FaBook,FaMoneyBillAlt,FaHourglassHalf,FaFolder } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 
@@ -12,6 +12,7 @@ const AdminSideBar = () => {
     { name: "dashboard", link: "/admin/dashboard", icon: MdOutlineDashboard },
     { name: "users", link: "/admin/users", icon: AiOutlineUser },
     { name: "teachers", link: "/admin/teachers", icon: FaUserGraduate },
+    { name: "category", link: "/admin/category", icon: FaFolder  },
     { name: "courses", link: "/admin/courses", icon: FaBook},
     { name: "pending courses", link: "/admin/pending-courses", icon: FaHourglassHalf },
     { name: "wallet", link: "/admin/wallet", icon:FaMoneyBillAlt },

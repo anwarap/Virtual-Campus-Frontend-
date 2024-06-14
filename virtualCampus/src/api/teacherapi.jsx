@@ -56,6 +56,49 @@ export const teacherLogin = async (data)=>{
     }
 }
 
+export const TforgetPassword1 = async (obj)=>{
+    try {
+        const response = await Api.post(teacherRoutes.forgetPassword1, obj);
+        return response
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        }
+    }
+}
+
+export const TforgetPassword2 = async(otp)=>{
+    try {
+        const response = await Api.post(teacherRoutes.forgetPassword2,otp);
+        return response
+    } catch (error) {
+        if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        }
+    }
+}
+
+export const TforgetPasswordFinal = async (data) =>{
+    try {
+        const response = await Api.post(teacherRoutes.forgetPasswordFinal,data);
+        console.log(response,'sfsf')
+        return response
+    } catch (error) {
+        console.log(error)
+        if(error && error.isAxiosError){
+            console.log('dada')
+            handleError(error)
+        }else{
+            console.log('dadada')
+            toast.error("Something went wrong")
+        }
+    }
+}
+
 export const teacherLogout = async()=>{
     try {
         const response = await Api.post(teacherRoutes.logout);
@@ -69,12 +112,28 @@ export const teacherLogout = async()=>{
     }
 }
 
-export const addCourse = async ()=>{
+
+
+export const addCourse = async (data)=>{
     try {
-        const response = await Api.post(teacherRoutes.addCourse)
+        const response = await Api.post(teacherRoutes.addCourse,data);
         return response;
     } catch (error) {
         if(error && error.isAxiosError){
+            handleError(error)
+        }else{
+            toast.error("Something went wrong")
+        } 
+    }
+}
+export const getCategory = async ()=>{
+    try {
+        const response = await Api.get(teacherRoutes.getCategory);
+        console.log(response)
+        return response;
+    } catch (error) {
+        if(error && error.isAxiosError){
+            console.log('fs')
             handleError(error)
         }else{
             toast.error("Something went wrong")
