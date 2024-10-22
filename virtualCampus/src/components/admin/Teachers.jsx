@@ -8,7 +8,6 @@ import Modal from "../common/Modal";
 const Teachers = () => {
   const [teacherData, setTeacherData] = useState([]);
   const [selectedTeacher,setSelectedTeacher] = useState(null);
-
   const { data: teacherDetails, isLoading } = useQuery("userData", getTeachers);
   useEffect(() => {
     if (teacherDetails) {

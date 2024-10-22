@@ -10,7 +10,7 @@ const userRoutes = {
     forgetPassword2:"/user/forget-password2",
     forgetPasswordFinal:"/user/forget-password-final",
 
-}
+} 
 
 
 export default userRoutes;

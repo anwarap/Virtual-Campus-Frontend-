@@ -11,7 +11,7 @@ export const handleError =(error)=>{
         }else{
             console.log(error)
 
-            toast.error(errrorMessage.data.message)
+            toast.error(error)
         }
 
     }

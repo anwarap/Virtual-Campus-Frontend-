@@ -13,6 +13,7 @@ const teacherRoutes = {
     forgetPasswordFinal:"/teacher/forget-password-final",
     getCategory:"/teacher/category",
     addCourse:"/teacher/add-course",
+    // teacherCourse:"/teacher/teacher-course/:teacherId",
 }
 
 

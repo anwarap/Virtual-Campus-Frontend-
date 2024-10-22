@@ -151,8 +151,9 @@ const AddCourse = () => {
     }
   }, [uploaded, selectedContent]);
 
-  const TeacherId = isTeacher.data.teacherData._id
-
+  const TeacherId = isTeacher.data?isTeacher.data.teacherData._id:isTeacher;
+  
+  console.log(courseDetails,'courseDetails')
   const handleCourse=async()=>{
     setIsUploading(true);
     try {
@@ -168,6 +169,7 @@ const AddCourse = () => {
       formData.append('lessons', JSON.stringify(courseDetails.lessons));
 
       const result = await addCourse(formData);
+      console.log(result,'result')
 
       if (result?.status) {
         setIsUploading(false);
