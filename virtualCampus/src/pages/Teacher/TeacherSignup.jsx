@@ -122,9 +122,10 @@ const TeacherSignup = () => {
       otp: otp,
     };
     const result = await verify(data);
+    console.log(result,'reaeuyar');
     if (result?.status == 200) {
       toast.success("signup successful");
-      dispatch(loginTeacher(result.data.teacherSave.data._id));
+      dispatch(loginTeacher(result.data.teacherSave._id));
       navigate("/teacher");
     } else {
       navigate("/teacher/signup");
@@ -140,8 +141,9 @@ const TeacherSignup = () => {
       password: "111",
     };
     const result = await signup(data);
+    console.log(result,'result');
     if (result?.status == 200) {
-      toast.success("Signup successful");
+      toast.success("Signup successfulll");
       dispatch(loginTeacher(data));
       navigate("/teacher");
     } else {

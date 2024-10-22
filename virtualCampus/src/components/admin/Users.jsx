@@ -9,6 +9,7 @@ const Users = () => {
   const [userData, setUserData] = useState([]);
   const [selectedUserId,setSelectedId] = useState(null);
   const { data: userDetails ,isLoading} = useQuery("userData", getUsers);
+  console.log(userDetails,'userFEraitls')
   useEffect(() => {
     if (userDetails) {
       setUserData(userDetails?.data);
@@ -21,15 +22,17 @@ const Users = () => {
       setUserData((prevData)=>
         prevData.map((user)=>{
           if(user._id == id){
+           
             return {...user,isBlocked:!user.isBlocked};
           }
+          console.log(user,'userserwre')
           return user;
         })
       )
     }
   }
   const filteredUser = userData ? userData : [];
-
+  console.log(filteredUser,'filteredUser')
   const dispatch = useDispatch();
 
   const handleBlockedButton = (id)=>{

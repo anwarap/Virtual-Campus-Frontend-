@@ -1,3 +1,4 @@
+
 const Adminroutes = {
     login:"/admin/login",
     logout:"/admin/logout",
@@ -6,7 +7,9 @@ const Adminroutes = {
     blockUser:"/admin/block-user",
     blockTeacher:"/admin/block-teacher",
     getCategory:"/admin/category",
-    createCategory:"/admin/create",
+    createCategory:"/admin/create-category",
+    getCourse:"/admin/get-courses",
+    approveCourse: (courseId) => `/admin/courses/${courseId}/status`,
     
 }
 

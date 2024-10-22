@@ -126,11 +126,12 @@ const Signup = () => {
 
   
     const result = await verify(data);
+    
 
     if (result?.status == 200) {
       toast.success("signup successful");
-      dispatch(loginUser(result.data.userSave.data._id));
-      navigate("/user");
+      dispatch(loginUser(result.data.userSave._id));
+      navigate("/user/signin");
     } else {
       navigate("/user/signup");
 

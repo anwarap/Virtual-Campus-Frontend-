@@ -49,7 +49,7 @@ const TeacherSignin = () => {
       password,
     };
     let response = await teacherLogin(formData);
-
+        console.log(response,'sf');
     if (response?.status == 200) {
       toast.success("Login successfull");
       dispatch(loginTeacher(response.data));
