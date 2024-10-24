@@ -75,7 +75,6 @@ const AddCourse = () => {
         const res = await axios.post(api,data);
         const {secure_url} = res.data;
         
-        console.log(secure_url,'secure_url');
 
         setSelectedContent({ ...selectedContent, content:secure_url});
         setLoading(false);
@@ -151,7 +150,9 @@ const AddCourse = () => {
     }
   }, [uploaded, selectedContent]);
 
-  const TeacherId = isTeacher.data?isTeacher.data.teacherData._id:isTeacher;
+  const TeacherId =isTeacher?.teacherData?._id;
+  console.log(TeacherId,'dfsfsfsf')
+
   
   console.log(courseDetails,'courseDetails')
   const handleCourse=async()=>{

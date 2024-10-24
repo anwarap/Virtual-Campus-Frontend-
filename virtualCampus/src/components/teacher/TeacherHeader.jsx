@@ -110,13 +110,13 @@ const TeacherHeader = () => {
       </Link>
   </li>
   <li>
-  <Link to={"/teacher/courses"}
+  <Link to={"/teacher/allCourses"}
       className='Nav_hover' style={{color:'white'}}>
        All Courses
       </Link>
   </li>
   <li>
-  <Link to={"/teacher/pending-course"}
+  <Link to={"/teacher/courseDetails"}
       className='Nav_hover' style={{color:'white'}}>
         Pending Course
       </Link>

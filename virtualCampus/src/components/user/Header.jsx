@@ -40,7 +40,11 @@ const Header = () => {
       {isUser ? (
 <>
     <div className=' pl-11 pr-4'style={{color:'white'}}>
-      <h1 className='Nav_hover'>Profile</h1>
+
+      <Link to={"/user/profile"}
+      className='Nav_hover'>
+       Profile
+      </Link>
     </div>
     <div style={{color:'white'}}>
       <button 
