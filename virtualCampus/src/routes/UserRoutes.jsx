@@ -7,6 +7,7 @@ import ForgetPassword from '../components/common/ForgetPassword';
 import Courses from '../pages/user/Courses';
 import CourseDetails from '../components/user/CourseDetails';
 import UserProfile from '../components/user/UserProfile';
+import Success from '../components/common/Success';
 
 const UserRoutes = () => {
   return (
@@ -18,6 +19,8 @@ const UserRoutes = () => {
       <Route path="/user/course" element={<Courses/>} />
       <Route path="/user/courseDetails/:id" element={<CourseDetails />} />
       <Route path="/user/profile" element={<UserProfile/>} />
+      <Route path="/user/success" element={<Success/>} />
+
 
    </Routes>
   )

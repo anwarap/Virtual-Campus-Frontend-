@@ -43,7 +43,11 @@ const TeacherHeader = () => {
       {isTeacher ? (
 <>
     <div className=' pl-11 pr-4'style={{color:'white'}}>
-      <h1 className='Nav_hover'>Profile</h1>
+      {/* <h1 className='Nav_hover'></h1> */}
+      <Link to={"/teacher/profile"}
+      className='Nav_hover'>
+        Profile
+      </Link>
     </div>
     <div style={{color:'white'}}>
       <button 

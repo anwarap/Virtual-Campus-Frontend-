@@ -109,3 +109,37 @@ export const logout = async()=>{
         }
     }
 }
+
+export const createPaymentIntent = async (courseId) => {
+    try {
+        const response = await Api.post(userRoutes.createPaymentIntent, { courseId });
+        console.log(response,'resosos')
+        return response.data;
+    } catch (error) {
+        console.log('ieieieie')
+        if (error && error.isAxiosError) {
+            handleError(error);
+        } else {
+            toast.error("Something went wrong while creating payment intent.");
+        }
+        throw error; // Re-throw the error to be handled by the component
+    }
+};
+
+export const handlePaymentSuccess = async (Buydata) => {
+    console.log(Buydata,'eeeee')
+    try {
+        const response = await Api.post(userRoutes.handlePaymentSuccess, Buydata);
+        console.log(response,'eeee')
+        return response;
+    } catch (error) {
+        console.log('dfsdfsf')
+        console.log(error)
+        if (error && error.isAxiosError) {
+            handleError(error);
+        } else {
+            toast.error("Something went wrong while processing the payment.");
+        }
+        throw error;
+    }
+};

@@ -8,6 +8,7 @@ import ForgetPassword from '../components/common/ForgetPassword';
 import CourseDetails from '../components/teacher/CourseDetails';
 import SingleCourseDetails from '../components/teacher/SingleCourseDetails';
 import AllCourses from '../components/teacher/AllCourses';
+import TeacherProfile from '../components/teacher/TeacherProfile';
 
 const TeacherRoutes = () => {
   return (
@@ -20,6 +21,8 @@ const TeacherRoutes = () => {
       <Route path="courseDetails" element={<CourseDetails />} />
       <Route path="courseDetails/:id" element={<SingleCourseDetails />} />
       <Route path="allCourses" element={<AllCourses />} />
+      <Route path="profile" element={<TeacherProfile />} />
+
 
 
   
