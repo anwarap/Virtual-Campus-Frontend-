@@ -139,12 +139,13 @@ export const getCategory = async ()=>{
 
 // export const getTeacherCourses = async (teacherId)=>{
 //     try {
-//         const response = await Api.get(teacherRoutes.teacherCourse(teacherId));
+//         console.log(teacherId,'sfds')
+//         const response = await Api.get(`/teacher/teacher-course/${teacherId}`);
 //         console.log(response,'reses');
 //         return response
 //     } catch (error) {
+//         console.log('ooo')
 //         if(error && error.isAxiosError){
-//             console.log('qqqqqq')
 //             handleError(error)
 //         }else{
 //             toast.error("Something went wrong")

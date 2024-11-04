@@ -10,7 +10,6 @@ const AdminCourseManagement = () => {
   const [pendingCourses, setPendingCourses] = useState([]);
   const navigate = useNavigate();
 
-  const queryClient = useQueryClient();
   const { data: courses, isLoading, isError } = useQuery('courses', getCourse);
   console.log(courses, 'courses');
 

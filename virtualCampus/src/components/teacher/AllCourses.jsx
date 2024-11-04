@@ -5,18 +5,20 @@ import { useSelector } from 'react-redux';
 import { getCourse } from '../../api/adminapi';
 import { useNavigate } from 'react-router-dom';
 
-const CourseDetails = () => {
-  const { isTeacher } = useSelector((state) => state.auth);
-  const teacherId = isTeacher?.teacherData?._id;
-  const [teacherCourses, setTeacherCourses] = useState([]);
-  const navigate = useNavigate();
 
-  const { data: courses, isLoading, isError } = useQuery('courses', getCourse);
+const AllCourses = () => {
+    const { isTeacher } = useSelector((state) => state.auth);
+    const teacherId = isTeacher?.teacherData?._id;
+    const [teacherCourses, setTeacherCourses] = useState([]);
+    const navigate = useNavigate();
+
+    const { data: courses, isLoading, isError } = useQuery('courses', getCourse);
   console.log(courses,'sfjsfsdf')
 
+  
   useEffect(() => {
     if (courses?.data?.data && teacherId) {
-      const filteredCourses = courses.data.data.filter(course => course.instructor === teacherId && !course.isApproved);
+      const filteredCourses = courses.data.data.filter(course => course.instructor === teacherId && course.isApproved);
       console.log(filteredCourses,'dfsfsf')
       setTeacherCourses(filteredCourses);
     }
@@ -30,7 +32,7 @@ const CourseDetails = () => {
     <>
   <TeacherHeader />
   <div className="text-2xl w-full flex justify-center">
-    <h1 className="mt-5 text-lg sm:text-2xl font-bold m-4 underline">PENDING COURSES</h1>
+    <h1 className="mt-5 text-lg sm:text-2xl font-bold m-4 underline">MY COURSES</h1>
   </div>
   <div className="container mx-auto p-4">
     {isLoading && <div className="text-center">Loading...</div>}
@@ -56,6 +58,6 @@ const CourseDetails = () => {
   </div>
 </>
   );
-};
+}
 
-export default CourseDetails;
+export default AllCourses

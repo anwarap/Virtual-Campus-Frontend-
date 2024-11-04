@@ -29,7 +29,7 @@ const Header = () => {
       className="flex items-center space-x-3 rtl:space-x-reverse"
     >
       
-       <img src="\LOOGO.png" alt="hydfdfddf" className="h-8" style={{maxWidth:'25%',maxHeight:'100%'}} />
+       <img src="\LOOOGO.png" alt="hydfdfddf" className="h-8" style={{maxWidth:'100%',maxHeight:'100%'}} />
       <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
         {/* Virtual Campus */}
       </span>
@@ -40,7 +40,11 @@ const Header = () => {
       {isUser ? (
 <>
     <div className=' pl-11 pr-4'style={{color:'white'}}>
-      <h1 className='Nav_hover'>Profile</h1>
+
+      <Link to={"/user/profile"}
+      className='Nav_hover'>
+       Profile
+      </Link>
     </div>
     <div style={{color:'white'}}>
       <button 
