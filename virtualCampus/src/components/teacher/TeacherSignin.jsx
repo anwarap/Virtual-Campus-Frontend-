@@ -71,7 +71,7 @@ const TeacherSignin = () => {
       dispatch(loginTeacher(data));
       navigate("/teacher")
     }else{
-      toast.error("Email already exists");
+      console.log("User not found")
     }
   }
 

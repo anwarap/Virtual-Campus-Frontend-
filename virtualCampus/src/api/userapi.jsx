@@ -59,9 +59,12 @@ export const login = async(loginData)=>{
 
 export const forgetPassword1 = async (obj)=>{
     try {
+        console.log(obj,'sf')
         const response = await Api.post(userRoutes.forgetPassword1, obj)
+        console.log(response,'ss')
         return response
     } catch (error) {
+        console.log(error)
         if(error && error.isAxiosError){
             handleError(error)
         }else{
@@ -74,9 +77,11 @@ export const forgetPassword2 = async (otp)=>{
     
     try {     
         const response = await Api.post(userRoutes.forgetPassword2, otp)
+        console.log(response)
         return response
     } catch (error) {
         if(error && error.isAxiosError){
+            console.log(error)
             handleError(error)
         }else{
             toast.error("Something went wrong")
@@ -85,10 +90,13 @@ export const forgetPassword2 = async (otp)=>{
 }
 
 export const forgetPasswordFinal = async (data)=>{
+    console.log(data)
     try {
-        const response = await Api.post(userRoutes.forgetPasswordFinal, data)
+        const response = await Api.post(userRoutes.forgetPasswordFinal, data);
+        console.log(response,'dsfew')
         return response
     } catch (error) {
+        console.log(error)
         if(error && error.isAxiosError){
             handleError(error)
         }else{

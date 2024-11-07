@@ -29,6 +29,7 @@ const ForgetPasswordFinal = ({email,teacher}) => {
         }else{
 
           const response = await forgetPasswordFinal(data);
+          console.log(response,'sfs')
           
           if(response?.status ==200){
             navigate('/user/signin')

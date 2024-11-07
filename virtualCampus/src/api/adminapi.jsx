@@ -111,3 +111,15 @@ export const approveCourse = async (courseId, isApproved)=>{
         } 
     }
 }
+
+export const blockCategory = async (id)=>{
+    try {
+        const response = await Api.post(`${Adminroutes.blockCategory}/${id}`);
+        return response;
+    } catch (error) {
+        if(error.response && error.response.data){
+            toast.error(error.response.data);
+        }
+    
+    }
+}

@@ -17,9 +17,9 @@ const StripePage = ({
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
-  const handleOpen = () => setOpen((cur) => !cur);
+  // const handleOpen = () => setOpen((cur) => !cur);
 
   const calculateAmount = () => {
     if (newOffer) {
@@ -91,7 +91,7 @@ const StripePage = ({
 
   return (
     <div className="font-sans">
-      <button
+      {/* <button
         onClick={handleOpen}
         className="px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg 
                  font-medium transition-colors duration-200 flex items-center justify-center
@@ -99,13 +99,13 @@ const StripePage = ({
       >
         <span>Pay Now</span>
         <span className="font-semibold">{calculateAmount()}</span>
-      </button>
+      </button> */}
 
       {open && (
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="min-h-screen px-4 text-center flex items-center justify-center">
             {/* Overlay */}
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={handleOpen} />
+            {/* <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={handleOpen} /> */}
 
             {/* Modal */}
             <div className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform 
@@ -120,12 +120,12 @@ const StripePage = ({
                     Complete your course purchase securely
                   </p>
                 </div>
-                <button
+                {/* <button
                   onClick={handleOpen}
                   className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
                 >
                   <FaTimesCircle className="w-6 h-6" />
-                </button>
+                </button> */}
               </div>
 
               {/* Amount Display */}

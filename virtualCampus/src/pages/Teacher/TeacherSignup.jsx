@@ -147,7 +147,7 @@ const TeacherSignup = () => {
       dispatch(loginTeacher(data));
       navigate("/teacher");
     } else {
-      toast.error("Email already exists");
+       console.log("Email already existssss")
     }
   };
   return (
