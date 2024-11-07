@@ -202,75 +202,70 @@ const AddCourse = () => {
       <TeacherHeader />
       {initailcompleted ? (
         <section>
-          <div className="flex justify-between items-center pt-5">
-            <div className="flex-1 text-center">
-              <h1 className="pl-60 text-2xl font-semibold">Lessons</h1>
+          <div className="flex flex-col md:flex-row items-center md:justify-between pt-5">
+    <div className="w-full md:w-auto text-center md:text-left md:pl-10">
+      <h1 className="text-2xl font-semibold">Lessons</h1>
+    </div>
+    <div className="mt-4 md:mt-0">
+      <button
+        className="rounded-md border py-3 px-5 text-white"
+        style={{ backgroundColor: "#3447AE" }}
+        onClick={() => {
+          setModalOpen(true);
+          setuploaded(false);
+        }}
+      >
+        Add Lessons
+      </button>
+    </div>
+  </div>
+
+          <div className="flex flex-col md:flex-row h-full pt-5 px-4 gap-5">
+            {/* Lesson List */}
+    <div className="w-full md:w-1/3 max-h-[75vh]  p-4 rounded-md overflow-hidden">
+      <h1 className="text-xl font-semibold mb-3">List Of Lessons:</h1>
+      <div className="overflow-y-auto h-full">
+        {courseDetails.lessons.map((les, index) => (
+          <div key={index} className="flex items-center gap-4 mb-3">
+            <div
+              className="flex-1 flex items-center bg-blue-900/70 rounded-md py-2 px-3 cursor-pointer"
+              onClick={() => setSelectedLesson(les.content)}
+            >
+              <p className="text-white text-sm font-medium">{les.title}</p>
             </div>
-            <div className="pr-9">
-              <button
-                className="rounded-md border py-3 px-5 text-white"
-                type="submit"
-                style={{ backgroundColor: "#3447AE" }}
-                onClick={() => {
-                  setModalOpen(true);
-                  setuploaded(false);
-                }}
-              >
-                Add Lessons
-              </button>
-            </div>
+            <FaTrashAlt
+              className="h-5 w-5 text-red-500 hover:text-red-700 cursor-pointer"
+              onClick={() => setDeleteIndex(index)}
+            />
           </div>
+        ))}
+      </div>
+      </div>
 
-          <div className="flex flex-col md:flex-row h-full pt-5">
-            <div className="w-full md:w-1/3">
-              <div className="pt-3 pl-12">
-                <h1 className="text-xl font-semibold">List Of Lessons:</h1>
-                <div className="h-[53.5vh] mt-2 overflow-y-scroll overflow-x-hidden w-full md:w-3/4 lg:w-3/4">
-                  {courseDetails.lessons.map((les, index) => (
-                    <div className="flex items-center gap-5 mb-5">
-                      <div
-                        key={index}
-                        className="flex gap-2 items-center bg-blue-900/70 rounded-md py-2 px-3  cursor-pointer w-full md:w-3/4 lg:w-3/4"
-                        onClick={() => setSelectedLesson(les.content)}
-                      >
-                        <p className="text-white text-lg font-medium">
-                          {les.title}
-                        </p>
-                      </div>
-                      <div className="icon-container flex justify-end pr-9 ">
-                        <FaTrashAlt
-                          className="icon-delete h-7 w-7"
-                          onClick={() => setDeleteIndex(index)}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Video Section */}
+    <div className="w-full md:flex-1 pr-3">
+      <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-md overflow-hidden">
+        <video
+          className="w-full h-full object-cover"
+          src={selectedLesson}
+          controls
+        ></video>
+      </div>
 
-            <div className="w-full md:w-2/3 pr-3  overflow-hidden">
-              <video
-                className="w-full h-[512px] object-cover "
-                src={selectedLesson}
-                controls
-              ></video>
-
-              <div className="flex justify-end pr-9 pt-8">
-                {isUploading ? (
-                  <Loader />
-                ) : (
-                  <button
-                    className="rounded-md border py-3 px-5 text-white"
-                    type="submit"
-                    style={{ backgroundColor: "#3447AE" }}
-                    onClick={() => handleCourse()}
-                  >
-                    Save Course
-                  </button>
-                )}
-              </div>
-            </div>
+      <div className="flex justify-center pt-4">
+        {isUploading ? (
+          <Loader />
+        ) : (
+          <button
+            className="rounded-md border py-3 px-5 text-white"
+            style={{ backgroundColor: "#3447AE" }}
+            onClick={handleCourse}
+          >
+            Save Course
+          </button>
+        )}
+      </div>
+    </div>
 
             {modalOpen ? (
               <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-30 flex items-center justify-center">
@@ -417,7 +412,6 @@ const AddCourse = () => {
                               type="button"
                               className="w-full flex justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  disabled:bg-blue-700/30"
                               onClick={uploadVideo}
-                              // disabled={selectedContent.content || loading ? true : false}
                               disabled={!!selectedContent.content || loading}
                             >
                               {loading ? (
@@ -442,7 +436,7 @@ const AddCourse = () => {
                                     />
                                   </svg>
                                   <span className="sr-only">Loading...</span>
-                                  <p className="animate-pulse">Uploading...</p>
+                                  <p className="">Uploading...m</p>
                                 </div>
                               ) : (
                                 "Upload Content"
@@ -473,209 +467,170 @@ const AddCourse = () => {
           </div>
         </section>
       ) : (
-        <section className="w-full min-h-screen flex flex-col justify-between ">
-          <div className="flex justify-center  ">
-            <div>
-              <h1 className="text-center text-2xl font-semibold  pt-5">
-                Course Details
-              </h1>
-            </div>
-          </div>
+        <section className="w-full  flex flex-col items-center justify-center overflow-hidden">
+  <div className="text-center mb-6 mt-8">
+    <h1 className="text-2xl font-semibold">Course Details</h1>
+  </div>
 
-          <div className="flex flex-col md:flex-row h-full pl-4">
-            <div
-              className="flex flex-col justify-center md:w-1/2 "
-              style={{ display: "block", marginTop: "20px" }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                <div>
-                  <label
-                    htmlFor="title"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Enter course title"
-                    value={courseDetails.title}
-                    onChange={(e) =>
-                      setCourseDetails({
-                        ...courseDetails,
-                        title: e.target.value,
-                      })
-                    }
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="level"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Level
-                  </label>
-                  <select
-                    type="text"
-                    name="level"
-                    placeholder="Enter course Level"
-                    value={courseDetails.level}
-                    onChange={(e) =>
-                      setCourseDetails({
-                        ...courseDetails,
-                        level: e.target.value,
-                      })
-                    }
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  >
-                    <option value="" disabled>
-                      --Select Course Level--
-                    </option>
-                    <option value="1">Beginner</option>
-                    <option value="2">Intermediate</option>
-                    <option value="3">Advanced</option>
-                  </select>
-                </div>
+  <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-screen-lg px-4">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full grid grid-cols-1 md:grid-cols-2 gap-6"
+      style={{ maxHeight: "75vh", overflowY: "auto" }}
+    >
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Title
+        </label>
+        <input
+          type="text"
+          name="title"
+          placeholder="Enter course title"
+          value={courseDetails.title}
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              title: e.target.value,
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+      </div>
 
-                <div>
-                  <label
-                    htmlFor="category"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Category
-                  </label>
-                  <select
-                    type="text"
-                    name="category"
-                    placeholder="Enter course category"
-                    value={courseDetails.category}
-                    onChange={(e) =>
-                      setCourseDetails({
-                        ...courseDetails,
-                        category: e.target.value,
-                      })
-                    }
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  >
-                    <option value="">--Select Course Level--</option>
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Level
+        </label>
+        <select
+          name="level"
+          value={courseDetails.level}
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              level: e.target.value,
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        >
+          <option value="" disabled>
+            --Select Course Level--
+          </option>
+          <option value="1">Beginner</option>
+          <option value="2">Intermediate</option>
+          <option value="3">Advanced</option>
+        </select>
+      </div>
 
-                    {categories?.data?.map((cat) => (
-                      <option key={cat._id} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Description
-                  </label>
-                  <input
-                    type="text"
-                    name="description"
-                    placeholder="Enter course description"
-                    value={courseDetails.description}
-                    onChange={(e) =>
-                      setCourseDetails({
-                        ...courseDetails,
-                        description: e.target.value,
-                      })
-                    }
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="price"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Price
-                  </label>
-                  <input
-                    type="number"
-                    name="price"
-                    placeholder="Enter the Price of the course"
-                    value={courseDetails.price}
-                    onChange={(e) =>
-                      setCourseDetails({
-                        ...courseDetails,
-                        price: Number(e.target.value),
-                      })
-                    }
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Category
+        </label>
+        <select
+          name="category"
+          value={courseDetails.category}
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              category: e.target.value,
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        >
+          <option value="">--Select Category--</option>
+          {categories?.data?.map((cat) => (
+            <option key={cat._id} value={cat.name}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-                <div>
-                  <label
-                    htmlFor="cover"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Cover Image
-                  </label>
-                  <div className="flex items-center mb-2">
-                    <input
-                      type="file"
-                      name="cover Image"
-                      placeholder="Upload cover image"
-                      accept="image/*"
-                      // setCover(e.target.files[0])
-                      onChange={(e) =>
-                        setCourseDetails({
-                          ...courseDetails,
-                          cover: e.target.files[0],
-                        })
-                      }
-                      className="flex-grow bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600  mr-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    />
-                  </div>
-                </div>
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Description
+        </label>
+        <input
+          type="text"
+          name="description"
+          placeholder="Enter course description"
+          value={courseDetails.description}
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              description: e.target.value,
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+      </div>
 
-                <div>
-                  <label
-                    htmlFor="preview"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Preview Video
-                  </label>
-                  <input
-                    type="file"
-                    name="preview"
-                    accept="video/*"
-                    placeholder="Upload preview video"
-                    onChange={(e) =>
-                      setCourseDetails({
-                        ...courseDetails,
-                        preview: e.target.files[0],
-                      })
-                    }
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div className="flex justify-center mt-8">
-                  <button
-                    className="rounded-md border py-3 px-5 text-white"
-                    type="submit"
-                    style={{ backgroundColor: "#3447AE" }}
-                  >
-                    Next
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div className="flex justify-center md:w-1/2">
-              <img
-                src="\5340737.jpg"
-                alt=""
-                className="w-full md:h-full object-cover"
-              />
-            </div>
-          </div>
-        </section>
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Price
+        </label>
+        <input
+          type="number"
+          name="price"
+          placeholder="Enter the Price"
+          value={courseDetails.price}
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              price: Number(e.target.value),
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Cover Image
+        </label>
+        <input
+          type="file"
+          name="cover"
+          accept="image/*"
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              cover: e.target.files[0],
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+          Preview Video
+        </label>
+        <input
+          type="file"
+          name="preview"
+          accept="video/*"
+          onChange={(e) =>
+            setCourseDetails({
+              ...courseDetails,
+              preview: e.target.files[0],
+            })
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full  dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+      </div>
+
+      <div className="col-span-full flex justify-center mt-4">
+        <button
+          type="submit"
+          className="rounded-md bg-blue-600 py-2 px-6 text-white"
+        >
+          Next
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
       )}
       {deleteIndex !== null && (
         <DeleteModal

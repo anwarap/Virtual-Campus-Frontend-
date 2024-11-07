@@ -10,6 +10,7 @@ const Adminroutes = {
     createCategory:"/admin/create-category",
     getCourse:"/admin/get-courses",
     approveCourse: (courseId) => `/admin/courses/${courseId}/status`,
+    blockCategory:"/admin//block-category",
     
 }
 

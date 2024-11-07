@@ -17,6 +17,7 @@ const ForgetPassword = ({teacher}) => {
             email,
             username:email
         }
+        console.log(obj,'d')
         if(teacher){
           const response = await TforgetPassword1(obj)
           if(response?.status == 200){
@@ -25,8 +26,9 @@ const ForgetPassword = ({teacher}) => {
             
         }
         }else{
-
+          console.log('dsd')
           const response = await forgetPassword1(obj)
+          console.log(response,'ses')
           if(response?.status == 200){
   
               setNext(true)
@@ -52,6 +54,7 @@ const ForgetPassword = ({teacher}) => {
             setFinal(true)}
         }else{
           const response = await forgetPassword2(data);
+          console.log(response,'reses')
           if(response?.status == 200){
             setFinal(true)}
 

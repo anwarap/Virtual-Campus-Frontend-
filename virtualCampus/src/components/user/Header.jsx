@@ -25,13 +25,13 @@ const Header = () => {
     <nav className="bg-white border-gray-200 dark:bg-gray-900" style={{backgroundColor:"#3447AE"}}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a
-      // href="https://flowbite.com/"
+     
       className="flex items-center space-x-3 rtl:space-x-reverse"
     >
       
        <img src="\LOOOGO.png" alt="hydfdfddf" className="h-8" style={{maxWidth:'100%',maxHeight:'100%'}} />
       <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-        {/* Virtual Campus */}
+        
       </span>
     </a>
     
@@ -39,17 +39,17 @@ const Header = () => {
       <div className='  flex flex-row '>
       {isUser ? (
 <>
-    <div className=' pl-11 pr-4'style={{color:'white'}}>
+    <div className=' pl-11 pr-4'>
 
       <Link to={"/user/profile"}
-      className='Nav_hover'>
+      className='Nav_hover font-[Poppins] text-[--third-color]'>
        Profile
       </Link>
     </div>
-    <div style={{color:'white'}}>
+    <div >
       <button 
       onClick={handleLogout}
-      className='Nav_hover'
+      className='Nav_hover font-[Poppins] text-[--third-color]'
       >
         Logout
       </button>
@@ -57,16 +57,16 @@ const Header = () => {
 </>
       ):(
         <>
-    <div className=' pl-11 pr-4'style={{color:'white'}}>
+    <div className=' pl-11 pr-4'>
       <Link to={"/user/signin"}
-      className='Nav_hover'>
+      className='Nav_hover font-[Poppins] text-[--third-color]'>
         Sign In
       </Link>
       
     </div>
-    <div style={{color:'white'}}>
+    <div>
     <Link to={"/user/signup"}
-      className='Nav_hover'>
+      className='Nav_hover font-[Poppins] text-[--third-color]'>
         Sign Up
       </Link>
     </div>
@@ -107,19 +107,19 @@ const Header = () => {
   <li>
 
     <Link to={"/user"}
-      className='Nav_hover' style={{color:'white'}}>
+      className='Nav_hover font-[Poppins] text-[--third-color]' >
         Home
       </Link>
   </li>
   <li>
   <Link to={"/user/course"}
-      className='Nav_hover' style={{color:'white'}}>
+      className='Nav_hover font-[Poppins] text-[--third-color]'>
         Course
       </Link>
   </li>
   <li>
   <Link to={"/user/about"}
-      className='Nav_hover' style={{color:'white'}}>
+      className='Nav_hover font-[Poppins] text-[--third-color]'>
         About
       </Link>
   </li>

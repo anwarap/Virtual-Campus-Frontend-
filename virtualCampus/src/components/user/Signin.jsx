@@ -71,12 +71,14 @@ const Signin = () => {
       password:"111"
     };
     const result = await login(data);
+    console.log(result,'fsf')
     if(result?.status==200){
       toast.success("Login successful");
       dispatch(loginUser(data));
       navigate("/user")
     }else{
-      toast.error("Email already exists");
+      console.log("User not found")
+     
     }
   }
 

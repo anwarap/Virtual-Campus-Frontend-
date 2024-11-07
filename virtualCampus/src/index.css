@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family:'roboto-normal'; 
+    src: url('../public/fonts/Roboto-Regular.ttf') format('truetype');
+
+}
+@font-face {
+    font-family:'roboto-bold'; 
+    src: url('../public/fonts/Roboto-Bold.ttf') format('truetype');
+
+}
+@font-face {
+    font-family:'poppins-normal'; 
+    src: url('../public/fonts/Poppins-Regular.ttf') format('truetype');
+
+}
+
+
+:root {
+    --primary-color: #3498db; /* Blue */
+    --secondary-color: #0B2639;
+    --third-color: rgba(255, 255, 255, 1);
+    
+}
+

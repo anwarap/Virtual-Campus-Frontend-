@@ -152,7 +152,8 @@ const Signup = () => {
       dispatch(loginUser(data));
       navigate("/user")
     }else{
-      toast.error("Email already exists");
+      console.log("Email already exists")
+     
     }
   }
   return (

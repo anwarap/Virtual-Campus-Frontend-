@@ -37,8 +37,8 @@ const UserCourses = () => {
         {course.map((course, index) => (
           <div key={index} className="border rounded-lg p-4 shadow-md"
           onClick = {()=>handleCourseClick(course._id)}>
-            <img src={course.cover} alt={course.title} className="w-full h-auto rounded-t-lg" />
-            <div className="mt-2 text-lg font-serif font-medium">{course.title}</div>
+            <img src={course.cover} alt={course.title} className="w-full h-auto rounded-t-lg " />
+            <div className="mt-2 text-lg font-serif font-medium text-center">{course.title}</div>
           </div>
         ))}
       </div>

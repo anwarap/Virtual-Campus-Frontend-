@@ -7,10 +7,10 @@ const Courses = () => {
     <>
          <Header />
          <div className="text-2xl w-full flex justify-center">
-    <h1 className="mt-5 text-lg sm:text-2xl font-bold m-4 underline">COURSES</h1>
+    <h1 className="mt-5 text-[32px] leading-[20px] font-['Roboto'] text-[--secondary-color] ">COURSES</h1>
   </div>
         <section className="flex gap-6 ">
-        {/* <AdminSideBar /> */}
+        
         <div className="text-2xl  w-full mt-7">
          
           <UserCourses />
